@@ -24,17 +24,18 @@ top_three_elfs = helper.PriorityQueue()
 with open("./input", "r") as elf_file:
     for line in elf_file:
         if line in ["\n", "\r\n"]:
+            # store elf calories in a prio queue
             top_three_elfs.push(current_elf_iventory_total, current_elf_iventory_total)
+            # trim so it only stores top 3 encountered
             if top_three_elfs.size() > 3:
                 top_three_elfs.pop()
             current_elf_iventory_total = 0
         else:
             current_elf_iventory_total += int(line)
 
-    # edge case: last elf's total calories does not have a new line after the file end
+    # edge case: last elf's total calories does not have a new line after the file end, need to redo check
     top_three_elfs.push(current_elf_iventory_total, current_elf_iventory_total)
-    # trim the priority queue down to top 3
-    while top_three_elfs.size() > 3:
+    if top_three_elfs.size() > 3:
         top_three_elfs.pop()
 
 print("---------------")
