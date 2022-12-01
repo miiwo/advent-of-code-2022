@@ -1,7 +1,7 @@
 import helper
 
 # Part 1
-print("Day 1 Part 1...")
+print("Day 1 Part 1")
 max_elf_inventory_total = 0
 current_elf_iventory_total = 0
 
@@ -13,10 +13,11 @@ with open("./input", "r") as elf_file:
         else:
             current_elf_iventory_total += int(line)
 
-print(max_elf_inventory_total)
+print("---------------")
+print(f"The total calories carried by the most /*gourmet*/ elf is: {max_elf_inventory_total} \n")
 
 # Part 2
-print("Day 1 Part 2...")
+print("Day 1 Part 2")
 current_elf_iventory_total = 0
 top_three_elfs = helper.PriorityQueue()
 
@@ -26,22 +27,16 @@ with open("./input", "r") as elf_file:
             top_three_elfs.push(current_elf_iventory_total, current_elf_iventory_total)
             if top_three_elfs.size() > 3:
                 top_three_elfs.pop()
-            print(current_elf_iventory_total)
             current_elf_iventory_total = 0
         else:
             current_elf_iventory_total += int(line)
 
-    # edge case: last elf's total calories
+    # edge case: last elf's total calories does not have a new line after the file end
     top_three_elfs.push(current_elf_iventory_total, current_elf_iventory_total)
-    # trim the priority queue
+    # trim the priority queue down to top 3
     while top_three_elfs.size() > 3:
         top_three_elfs.pop()
 
-
-#print("----------")
-#print(top_three_elfs.pop())
-#print(top_three_elfs.pop())
-#print(top_three_elfs.pop())
-print("----------")
+print("---------------")
 elf_sum = top_three_elfs.pop() + top_three_elfs.pop() + top_three_elfs.pop()
-print(elf_sum)
+print(f"The sum of the top 3 calorie favoring elves are: {elf_sum}")
