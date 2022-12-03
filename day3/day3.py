@@ -4,17 +4,20 @@ def findPriority(item:chr):
     else:
         return ord(item) - 38
 
-def findSharedItemInNGroup(*args) -> int:
-    # item tracker of priority
+def findSharedItemInNGroup(group) -> int:
     didAppear = [0] * 52
 
-    for arg in args[:-1]:
-        for item in arg:
+    print(group)
+    for member in group[:-1]:
+        for item in member:
             didAppear[findPriority(item) - 1] += 1
 
-    for item in args[-1]:
+    for item in group[-1]:
         priority = findPriority(item)
-        return priority if didAppear[priority - 1] == 2 else 0
+        if didAppear[priority - 1] == len(group) - 1:
+            return priority
+    
+    return 0
 
 
 
@@ -44,12 +47,15 @@ def part1() -> int:
 
 def part2() -> int:
     prioritySum = 0
+    group = []
     with open("./input", "r") as elf_file:
         for line in elf_file:
-            pass
-            # collect 3 lines at a time
-            # run findSharedItemInNGroup
-            # add to priority total
+            if len(group) != 3:
+                group.append(line)
+            else:
+                prioritySum += findSharedItemInNGroup(group)
+                group = [line]
+            
     return prioritySum
     
 
