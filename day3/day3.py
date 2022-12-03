@@ -1,9 +1,29 @@
-# setup hashmap of boolean
+# item tracker of priority
+didAppear = [0] * 52
+prioritySum = 0
 
-# read file line by line
-# split line in half
-# go through first half and turn hash map on ; )
-# go through second half checking if any keys are turned on
-# if key turned on, its a duplicate, return priority
-# sum up each line/rucksack
-# return priority sum
+def findPriority(item:chr):
+    if ord(item) >= 97:
+        return ord(item) - 96
+    else:
+        return ord(item) - 38
+
+with open("./input", "r") as elf_file:
+    for line in elf_file:
+        firstCompartment = line[0:len(line)//2]
+        secondCompartment = line[len(line)//2:]
+
+        for item in firstCompartment:
+            didAppear[findPriority(item) - 1] = 1
+
+        for item in secondCompartment:
+            priority = findPriority(item)
+            if didAppear[priority - 1]:
+                prioritySum += priority
+                break
+        
+        # reset item tracker
+        didAppear = [0] * 52
+
+    print(prioritySum)
+
