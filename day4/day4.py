@@ -5,8 +5,8 @@ def part1() -> int:
             assignedSections = line.split(",")
             elfOne = assignedSections[0].split("-")
             elfTwo = assignedSections[1].split("-")
-            
-            if (elfOne[0] <= elfTwo[0] and elfOne[1] >= elfTwo[1]) or (elfTwo[0] <= elfOne[0] and elfTwo[1] >= elfOne[1]):
+
+            if (int(elfOne[0]) <= int(elfTwo[0]) and int(elfOne[1]) >= int(elfTwo[1])) or (int(elfTwo[0]) <= int(elfOne[0]) and int(elfTwo[1]) >= int(elfOne[1])):
                 result += 1
 
     return result
