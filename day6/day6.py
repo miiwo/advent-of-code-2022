@@ -1,24 +1,20 @@
 def part1():
-    startIndex = 0
-    endIndex = 0
     seenAlpha = [0] * 1000
+    startIndex = 0
 
     with open("./input", "r") as elf_file:
         transmission = elf_file.read()
 
-        for char in transmission:
-            print(char)
+        for index, char in enumerate(transmission):
             if seenAlpha[ord(char)]:
-                startIndex = endIndex
+                startIndex = index
                 seenAlpha = [0] * 1000
 
-            endIndex += 1
             seenAlpha[ord(char)] = 1
-            if endIndex - startIndex == 4:
-                break
+            if index - startIndex == 4:
+                return index
 
-        return startIndex
-
+# cabdeft
 
 def part2():
     pass
