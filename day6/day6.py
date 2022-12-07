@@ -14,15 +14,9 @@ def part1():
             if index - startIndex == 4:
                 return index
 
-# cabdeftf
-
 def part2():
-    seenAlpha = [-1] * 1000
-    startIndex = 0
-
     with open("./input", "r") as elf_file:
         transmission = elf_file.read()
-        #transmission = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"
 
         for index, char in enumerate(transmission[:-14]):
             if not anyDuplicate(transmission[index: index + 14]):
